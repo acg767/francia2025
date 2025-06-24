@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Viaggio Francia & Bretagna 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -61,6 +62,164 @@
     ul li {
       margin: 0.5rem 0;
       font-size: 1.05rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 900px) {
+      body {
+        padding: 1rem;
+      }
+      table {
+        font-size: 0.95rem;
+      }
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 1.4rem;
+        padding: 0.6rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      .section {
+        margin-bottom: 2rem;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 1.5rem;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        min-height: 40px;
+      }
+      td:last-child {
+        border-bottom: none;
+      }
+      td:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 48%;
+        padding-left: 0.75rem;
+        font-weight: bold;
+        white-space: nowrap;
+        color: #023e8a;
+        background: #f1faff;
+        border-right: 2px solid #ade8f4;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      /* Map headers to cells */
+      tr:nth-child(1) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(1) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(1) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(1) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(1) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(1) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(1) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(1) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(2) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(2) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(2) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(2) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(2) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(2) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(2) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(2) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(3) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(3) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(3) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(3) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(3) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(3) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(3) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(3) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(4) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(4) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(4) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(4) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(4) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(4) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(4) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(4) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(5) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(5) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(5) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(5) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(5) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(5) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(5) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(5) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(6) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(6) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(6) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(6) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(6) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(6) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(6) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(6) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(7) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(7) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(7) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(7) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(7) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(7) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(7) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(7) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(8) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(8) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(8) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(8) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(8) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(8) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(8) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(8) td:nth-child(8)::before { content: "Hotel"; }
+
+      tr:nth-child(9) td:nth-child(1)::before { content: "Giorno"; }
+      tr:nth-child(9) td:nth-child(2)::before { content: "Data"; }
+      tr:nth-child(9) td:nth-child(3)::before { content: "Tragitto"; }
+      tr:nth-child(9) td:nth-child(4)::before { content: "Km"; }
+      tr:nth-child(9) td:nth-child(5)::before { content: "Tempo"; }
+      tr:nth-child(9) td:nth-child(6)::before { content: "Cose Belle sul Viaggio"; }
+      tr:nth-child(9) td:nth-child(7)::before { content: "Da Vedere"; }
+      tr:nth-child(9) td:nth-child(8)::before { content: "Hotel"; }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+      .highlight {
+        padding: 0.6rem;
+        font-size: 0.98rem;
+      }
+      ul li {
+        font-size: 0.97rem;
+      }
     }
   </style>
 </head>
@@ -130,9 +289,9 @@
     <h2>🏨 Sistemazioni</h2>
     <div class="highlight">🌲 <strong>Courpière</strong> – <a href="https://www.loreedesbois63.com/" target="_blank">L'Orée des Bois</a></div>
     <div class="highlight">🎢 <strong>Futuroscope</strong> – <a href="https://www.futuroscope.com/en/xperiences/hotels/hotel-du-futuroscope" target="_blank">Hôtel du Futuroscope</a></div>
-    <div class="highlight">🏡 <strong>Corseul</strong> – <a href="https://www.giga-location.com/gite-de-groupe/BRETAGNE/Cotes-d-Armor/645/La-Julerie-4-Gites-24-Personnes-.html#:~:text=Description,%C3%A0%20la%20piscine%20int%C3%A9rieure%20chauff%C3%A9e." target="_blank">Gîtes rurali con piscina</a></div>
+    <div class="highlight">🏡 <strong>Corseul</strong> – <a href="https://www.giga-location.com/gite-de-groupe/BRETAGNE/Cotes-d-Armor/645/La-Julerie-4-Gites-24-Personnes-.html#:~:text=Description,[...]" target="_blank">La Julerie</a></div>
     <div class="highlight">🏰 <strong>Tours</strong> – <a href="https://www.lamauguiniere.com/" target="_blank">Mauguinière, Neuillé-le-Lierre</a></div>
-    <div class="highlight">🏔️ <strong>Martigny (CH)</strong> – <a href="https://hotel-gd-st-bernard.ch/"_blank">Hôtel du Grand-Saint-Bernard</a></div>
+    <div class="highlight">🏔️ <strong>Martigny (CH)</strong> – <a href="https://hotel-gd-st-bernard.ch/" target="_blank">Hôtel du Grand-Saint-Bernard</a></div>
   </div>
 
 </body>
