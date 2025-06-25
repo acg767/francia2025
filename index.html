@@ -1,53 +1,40 @@
-<head>
-  <style>
-    /* ... your previous :root and other styles ... */
+header {
+  background: linear-gradient(135deg, var(--blue), var(--light-blue));
+  padding: 3rem 1rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  /* Remove position sticky here */
+  color: var(--white);
+  font-family: 'Merriweather', serif;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 100;
+}
 
-    header {
-      background: linear-gradient(135deg, var(--blue), var(--light-blue));
-      padding: 3rem 1rem 1rem;
-      text-align: center;
-      box-shadow: 0 4px 10px var(--shadow-light);
-      position: relative;
-      z-index: 100;
-      color: var(--white);
-      font-family: 'Merriweather', serif;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-    }
+header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  border-bottom: 4px solid var(--white);
+  display: inline-block;
+  padding-bottom: 0.3em;
 
-    header h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2.8rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      line-height: 1.2;
-      border-bottom: 4px solid var(--white);
-      display: inline-block;
-      padding-bottom: 0.3em;
+  position: sticky; /* Make the title sticky */
+  top: 0;
+  background: linear-gradient(135deg, var(--blue), var(--light-blue));
+  padding-top: 0.8rem;
+  padding-bottom: 0.3rem;
+  z-index: 101;
+}
 
-      position: sticky;
-      top: 0;
-      background: linear-gradient(135deg, var(--blue), var(--light-blue));
-      padding-top: 0.8rem;
-      padding-bottom: 0.3rem;
-      z-index: 101;
-    }
-
-    header p {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin: 0 auto 1rem;
-      max-width: 700px;
-      font-style: italic;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1 id="main-title">Viaggio in Bretagna - Agosto 2025</h1>
-    <p id="subtitle">Un tour on the road di 9 giorni / 8 notti tra cultura, paesaggi, relax e .. monellate!</p>
-  </header>
-
-  <!-- Rest of your page content -->
-</body>
+header p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 auto 1rem;
+  max-width: 700px;
+  font-style: italic;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
