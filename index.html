@@ -1,170 +1,277 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viaggio in Francia Agosto 2025</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viaggio in Bretagna - Agosto 2025</title>
   <style>
+    /* Breton inspired color palette */
     :root {
-      --primary: #2c3e50;
-      --accent: #3498db;
-      --bg-light: #f0f8ff;
+      --black: #000000;
       --white: #ffffff;
-      --text-dark: #2d3436;
+      --blue: #0055a4; /* deep blue Breton flag */
+      --light-blue: #a7c7e7;
+      --grey-light: #f9f9f9;
+      --text-dark: #212121;
+      --border-radius: 10px;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+      --bretonPattern: url('https://www.transparenttextures.com/patterns/brushed-alum.png');
     }
 
-    * { box-sizing: border-box; }
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap');
+
+    /* Reset box sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Open Sans', sans-serif;
       line-height: 1.6;
       margin: 0;
       padding: 0;
-      background: var(--bg-light);
+      background-color: var(--grey-light);
+      background-image: var(--bretonPattern);
       color: var(--text-dark);
+      scroll-behavior: smooth;
     }
 
     header {
-      background: linear-gradient(135deg, #a2d4ec, #d0e6f7);
-      padding: 2rem 1rem;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      padding: 3rem 1rem 2rem;
       text-align: center;
+      box-shadow: 0 4px 10px var(--shadow-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      color: var(--white);
+      font-family: 'Merriweather', serif;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
     }
 
     header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: var(--primary);
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      border-bottom: 4px solid var(--white);
+      display: inline-block;
+      padding-bottom: 0.3em;
     }
 
     header p {
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 auto;
+      max-width: 700px;
+      font-style: italic;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    .container {
+    main.container {
       max-width: 900px;
-      margin: auto;
-      padding: 1rem;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
     }
 
-    .tappa {
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      transition: transform 0.2s ease;
+    article.tappa {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 18px var(--shadow-light);
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    article.tappa:hover,
+    article.tappa:focus-within {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.15);
+      outline: none;
     }
 
-    .tappa:hover {
-      transform: scale(1.01);
+    article.tappa img {
+      width: 45%;
+      max-width: 300px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.1));
+    }
+    article.tappa img:hover {
+      transform: scale(1.05);
     }
 
-    .tappa h3 {
+    article.tappa > div {
+      padding: 1.2rem 1rem 1.2rem 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    article.tappa h3 {
       margin-top: 0;
-      color: var(--primary);
+      font-family: 'Merriweather', serif;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 1.8rem;
+      border-bottom: 3px solid var(--blue);
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .tappa img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 1rem 0;
+    article.tappa p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: var(--text-dark);
     }
 
-    a {
-      color: var(--accent);
+    /* Non-clickable labels */
+    article.tappa p strong {
+      color: var(--text-dark);
+      font-weight: 700;
+      cursor: default;
       text-decoration: none;
     }
 
-    a:hover {
+    /* Clickable links styling */
+    a {
+      color: var(--blue);
       text-decoration: underline;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #003a71;
+      outline: none;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
+    @media (max-width: 700px) {
+      article.tappa {
+        flex-direction: column;
       }
+      article.tappa img {
+        width: 100%;
+        max-width: 100%;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        margin-bottom: 1rem;
+      }
+      article.tappa > div {
+        padding: 0 1rem 1.5rem;
+      }
+    }
 
-      .tappa {
-        padding: 1rem;
-      }
+    article.tappa:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Viaggio in Francia - Agosto 2025</h1>
+    <h1>Viaggio in Bretagna - Agosto 2025</h1>
     <p>Un tour on the road di 9 giorni / 8 notti tra cultura, paesaggi, relax e .. monellate!</p>
   </header>
 
-  <div class="container">
-    <div class="tappa">
-      <h3>Giorno 1 (9 agosto)</h3>
-      <img src="https://images.unsplash.com/photo-1623222213703-ef3be8e5888a" alt="Sacra di San Michele">
-      <p><strong>Tragitto:</strong> Genova → Clermont-Ferrand (650 km – 7h)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.sacradisanmichele.com/">Sacra di San Michele</a>, <a href="https://www.chambery.fr/">Chambéry</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.loreedesbois63.com/">L'Orée des Bois</a></p>
-    </div>
+  <main class="container" role="main" aria-label="Programma del viaggio in Bretagna agosto 2025">
 
-    <div class="tappa">
-      <h3>Giorno 2 (10 agosto)</h3>
-      <img src="https://images.unsplash.com/photo-1604405351488-b9a5188aa77d" alt="Castello di Chenonceau">
-      <p><strong>Tragitto:</strong> Clermont-Ferrand → Futuroscope (450 km – 5h)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.ville-bourges.fr/">Bourges</a>, <a href="https://www.chenonceau.com/">Castello di Chenonceau</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html">Maison de Cœur Futuroscope</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno1">
+      <img src="1.jfif" alt="Abbazia di San Michele" loading="lazy" />
+      <div>
+        <h3 id="giorno1">Giorno 1 (9 agosto)</h3>
+        <p><strong>Tragitto:</strong> Genova &rarr; Clermont-Ferrand (650 km – 7h)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.sacradisanmichele.com/" target="_blank" rel="noopener noreferrer">Sacra di San Michele</a>, <a href="https://www.chambery.fr/" target="_blank" rel="noopener noreferrer">Chambéry</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.loreedesbois63.com/" target="_blank" rel="noopener noreferrer">L'Orée des Bois</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 3 (11 agosto)</h3>
-      <img src="https://images.unsplash.com/photo-1582719478250-06f30b6f14c6" alt="Futuroscope">
-      <p><strong>Attività:</strong> Intera giornata al <a href="https://www.futuroscope.com/">Parco Futuroscope</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html">Maison de Cœur Futuroscope</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno2">
+      <img src="2.jfif" alt="Castello di Chenonceau" loading="lazy" />
+      <div>
+        <h3 id="giorno2">Giorno 2 (10 agosto)</h3>
+        <p><strong>Tragitto:</strong> Clermont-Ferrand &rarr; Futuroscope (450 km – 5h)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.ville-bourges.fr/" target="_blank" rel="noopener noreferrer">Bourges</a>, <a href="https://www.chenonceau.com/" target="_blank" rel="noopener noreferrer">Castello di Chenonceau</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html" target="_blank" rel="noopener noreferrer">Maison de Cœur Futuroscope</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 4 (12 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Dinan_bretagne.jpg/640px-Dinan_bretagne.jpg" alt="Dinan">
-      <p><strong>Tragitto:</strong> Futuroscope → Corseul (330 km – 3h30)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.dinan.fr/">Dinan</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/">La Julerie</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno3">
+      <img src="3.jfif" alt="Parco Futuroscope" loading="lazy" />
+      <div>
+        <h3 id="giorno3">Giorno 3 (11 agosto)</h3>
+        <p><strong>Attività:</strong> Intera giornata al <a href="https://www.futuroscope.com/" target="_blank" rel="noopener noreferrer">Parco Futuroscope</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html" target="_blank" rel="noopener noreferrer">Maison de Cœur Futuroscope</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 5 (13 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Mont_St_Michel_3%2C_Brittany%2C_France_-_July_2011.jpg/640px-Mont_St_Michel_3%2C_Brittany%2C_France_-_July_2011.jpg" alt="Mont Saint-Michel">
-      <p><strong>Attività: giro ad anello con visita di </strong> <a href="https://www.ot-montsaintmichel.com/">Mont Saint-Michel</a>, <a href="https://www.ville-saint-malo.fr/">Saint-Malo</a>, <a href="https://www.ville-cancale.fr/">Cancale</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/">La Julerie</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno4">
+      <img src="4.jfif" alt="Dinan, Bretagna" loading="lazy" />
+      <div>
+        <h3 id="giorno4">Giorno 4 (12 agosto)</h3>
+        <p><strong>Tragitto:</strong> Futuroscope &rarr; Corseul (330 km – 3h30)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.dinan.fr/" target="_blank" rel="noopener noreferrer">Dinan</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 6 (14 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Cap_Frehel.jpg/640px-Cap_Frehel.jpg" alt="Cap Fréhel">
-      <p><strong>Attività: giro ad anello con visita di </strong> <a href="https://www.bretagne35.com/destinations/les-10-destinations/saint-malo-baie-du-mont-saint-michel/experiences/cap-frehel/">Cap Fréhel</a>, <a href="https://www.jardin-medieval.com/fort-la-latte.html">Fort La Latte</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/">La Julerie</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno5">
+      <img src="5.jfif" alt="Mont Saint-Michel" loading="lazy" />
+      <div>
+        <h3 id="giorno5">Giorno 5 (13 agosto)</h3>
+        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.ot-montsaintmichel.com/" target="_blank" rel="noopener noreferrer">Mont Saint-Michel</a>, <a href="https://www.ville-saint-malo.fr/" target="_blank" rel="noopener noreferrer">Saint-Malo</a>, <a href="https://www.ville-cancale.fr/" target="_blank" rel="noopener noreferrer">Cancale</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 7 (15 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Ch%C3%A2teau_de_Chambord_depuis_le_canal.jpg/640px-Ch%C3%A2teau_de_Chambord_depuis_le_canal.jpg" alt="Castelli della Loira">
-      <p><strong>Tragitto:</strong> Corseul → Tours (350 km – 3h30)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.valdeloire-france.com/">Castelli della Loira</a><br>
-      <strong>Pernottamento:</strong> <a href="https://www.lamauguiniere.com/">Chambres d'hôtes de la Mauguinière</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno6">
+      <img src="6.jfif" alt="Cap Fréhel, Bretagna" loading="lazy" />
+      <div>
+        <h3 id="giorno6">Giorno 6 (14 agosto)</h3>
+        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.bretagne35.com/destinations/les-10-destinations/saint-malo-baie-du-mont-saint-michel/experiences/cap-frehel/" target="_blank" rel="noopener noreferrer">Cap Fréhel</a>, <a href="https://www.jardin-medieval.com/fort-la-latte.html" target="_blank" rel="noopener noreferrer">Fort La Latte</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 8 (16 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/V%C3%A9zelay.JPG/640px-V%C3%A9zelay.JPG" alt="Vézelay">
-      <p><strong>Tragitto:</strong> Tours → Martigny (700 km – 7h)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.vezelaytourisme.com/">Vézelay</a>, <a href="https://www.destinationdijon.com/">Digione</a>, <a href="https://www.musees-valais.ch/fr/institution/fondation-barry-martigny-43">Cani San Bernardo</a>, <a href="https://www.bainsdesaillon.ch/">Terme di Martigny</a><br>
-      <strong>Pernottamento:</strong> <a href="https://hotel-gd-st-bernard.ch/">Hôtel du Grand-Saint-Bernard</a></p>
-    </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno7">
+      <img src="7.jfif" alt="Castello di Chambord" loading="lazy" />
+      <div>
+        <h3 id="giorno7">Giorno 7 (15 agosto)</h3>
+        <p><strong>Tragitto:</strong> Corseul &rarr; Tours (350 km – 3h30)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.valdeloire-france.com/" target="_blank" rel="noopener noreferrer">Castelli della Loira</a><br />
+        <strong>Pernottamento:</strong> <a href="https://www.lamauguiniere.com/" target="_blank" rel="noopener noreferrer">Chambres d'hôtes de la Mauguinière</a></p>
+      </div>
+    </article>
 
-    <div class="tappa">
-      <h3>Giorno 9 (17 agosto)</h3>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hospice_du_Grand-Saint-Bernard.jpg/640px-Hospice_du_Grand-Saint-Bernard.jpg" alt="Gran San Bernardo">
-      <p><strong>Tragitto:</strong> Martigny → Genova (400 km – 4h30)<br>
-      <strong>Attrazioni:</strong> <a href="https://www.gsbernard.ch/">Passo del Gran San Bernardo</a>, <a href="https://www.saint-bernard.ch/it/attivita/passeggiata-con-i-cani-san-bernardo-in-estate-17581">Escursione con i cani San Bernardo</a></p>
-    </div>
-  </div>
+    <article class="tappa" tabindex="0" aria-labelledby="giorno8">
+      <img src="8.jfif" alt="Vézelay" loading="lazy" />
+      <div>
+        <h3 id="giorno8">Giorno 8 (16 agosto)</h3>
+        <p><strong>Tragitto:</strong> Tours &rarr; Martigny (700 km – 7h)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.vezelaytourisme.com/" target="_blank" rel="noopener noreferrer">Vézelay</a>, <a href="https://www.destinationdijon.com/" target="_blank" rel="noopener noreferrer">Digione</a>, <a href="https://www.musees-valais.ch/fr/institution/fondation-barry-martigny-43" target="_blank" rel="noopener noreferrer">Cani San Bernardo</a>, <a href="https://www.bainsdesaillon.ch/" target="_blank" rel="noopener noreferrer">Terme di Martigny</a><br />
+        <strong>Pernottamento:</strong> <a href="https://hotel-gd-st-bernard.ch/" target="_blank" rel="noopener noreferrer">Hôtel du Grand-Saint-Bernard</a></p>
+      </div>
+    </article>
+
+    <article class="tappa" tabindex="0" aria-labelledby="giorno9">
+      <img src="9.jfif" alt="Passo del Gran San Bernardo" loading="lazy" />
+      <div>
+        <h3 id="giorno9">Giorno 9 (17 agosto)</h3>
+        <p><strong>Tragitto:</strong> Martigny &rarr; Genova (400 km – 4h30)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.gsbernard.ch/" target="_blank" rel="noopener noreferrer">Passo del Gran San Bernardo</a>, <a href="https://www.saint-bernard.ch/it/attivita/passeggiata-con-i-cani-san-bernardo-in-estate-17581" target="_blank" rel="noopener noreferrer">Escursione con i cani San Bernardo</a></p>
+      </div>
+    </article>
+
+  </main>
 </body>
 </html>
