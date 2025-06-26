@@ -16,6 +16,7 @@
       --border-radius: 10px;
       --shadow-light: rgba(0, 0, 0, 0.1);
       --bretonPattern: url('https://www.transparenttextures.com/patterns/brushed-alum.png');
+      --highlight-bg: #e1ecf9;
     }
 
     @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap');
@@ -37,50 +38,68 @@
     }
 
     header {
-  background: linear-gradient(135deg, var(--blue), var(--light-blue));
-  padding: 3rem 1rem 1rem;
-  text-align: center;
-  box-shadow: 0 4px 10px var(--shadow-light);
-  /* Remove position sticky here */
-  color: var(--white);
-  font-family: 'Merriweather', serif;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-  position: relative;
-  z-index: 100;
-}
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      padding: 3rem 1rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px var(--shadow-light);
+      color: var(--white);
+      font-family: 'Merriweather', serif;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 100;
+    }
 
-header h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2.8rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  border-bottom: 4px solid var(--white);
-  display: inline-block;
-  padding-bottom: 0.3em;
+    header h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      border-bottom: 4px solid var(--white);
+      display: inline-block;
+      padding-bottom: 0.3em;
 
-  position: sticky; /* Make the title sticky */
-  top: 0;
-  background: linear-gradient(135deg, var(--blue), var(--light-blue));
-  padding-top: 0.8rem;
-  padding-bottom: 0.3rem;
-  z-index: 101;
-}
+      position: sticky; /* Make the title sticky */
+      top: 0;
+      background: linear-gradient(135deg, var(--blue), var(--light-blue));
+      padding-top: 0.8rem;
+      padding-bottom: 0.3rem;
+      z-index: 101;
+    }
 
-header p {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0 auto 1rem;
-  max-width: 700px;
-  font-style: italic;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
+    header p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 auto 1rem;
+      max-width: 700px;
+      font-style: italic;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
 
     main.container {
       max-width: 900px;
       margin: 3rem auto 4rem;
       padding: 0 1rem;
+    }
+
+    /* Search filter input */
+    #filter-container {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    #filter {
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: var(--border-radius);
+      border: 2px solid var(--blue);
+      width: 100%;
+      max-width: 320px;
+      transition: border-color 0.3s ease;
+    }
+    #filter:focus {
+      outline: none;
+      border-color: #003a71;
     }
 
     article.tappa {
@@ -91,8 +110,13 @@ header p {
       overflow: hidden;
       display: flex;
       gap: 1.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
       cursor: default;
+    }
+    article.tappa.highlight {
+      background-color: var(--highlight-bg);
+      box-shadow: 0 16px 30px rgba(0, 85, 164, 0.3);
+      transform: scale(1.05);
     }
     article.tappa:hover,
     article.tappa:focus-within {
@@ -183,35 +207,67 @@ header p {
       outline: 3px solid var(--blue);
       outline-offset: 3px;
     }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 10px var(--shadow-light);
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-weight: 700;
+      font-size: 1.1rem;
+      z-index: 999;
+      user-select: none;
+    }
+    #backToTop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #backToTop:focus {
+      outline: 3px solid #003a71;
+      outline-offset: 2px;
+    }
+
+    /* Map container styling */
+    #map {
+      height: 450px;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 18px var(--shadow-light);
+    }
   </style>
 
-	<!-- Leaflet CSS -->
-<link 
-    rel="stylesheet" 
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+  <!-- Leaflet CSS from CDN -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
-
-<!-- Leaflet JS -->
-	<script 
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-  ></script>
-
 </head>
 <body>
   <header>
-  <h1 id="main-title">Viaggio in Francia</h1>
-  <p id="subtitle">Un tour on the road di 9 giorni / 8 notti tra cultura, paesaggi, relax e .. monellate!</p>
-</header>
+    <h1 id="main-title">Viaggio in Francia</h1>
+    <p id="subtitle">Un tour on the road di 9 giorni / 8 notti tra cultura, paesaggi, relax e .. monellate!</p>
+  </header>
 
   <main class="container" role="main" aria-label="Programma del viaggio in Bretagna agosto 2025">
-
+  
     <article class="tappa" tabindex="0" aria-labelledby="giorno1">
       <img src="1.jfif" alt="Abbazia di San Michele" loading="lazy" />
       <div>
         <h3 id="giorno1">Giorno 1 (9 agosto)</h3>
-        <p><strong>Tragitto:</strong> Genova &rarr; Clermont-Ferrand (650 km – 7h)<br />
+        <p><strong>Tragitto:</strong> Genova &rarr; Saint-Just-en-Chevalet (600 km – 7h)<br />
         <strong>Attrazioni:</strong> <a href="https://www.sacradisanmichele.com/" target="_blank" rel="noopener noreferrer">Sacra di San Michele</a>, <a href="https://www.chambery.fr/" target="_blank" rel="noopener noreferrer">Chambéry</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.loreedesbois63.com/" target="_blank" rel="noopener noreferrer">L'Orée des Bois</a></p>
+        <strong>Pernottamento:</strong> <a href="https://www.hotel-la-poste-loire.com/" target="_blank" rel="noopener noreferrer">Hotel Restaurant de la Poste</a></p>
       </div>
     </article>
 
@@ -219,9 +275,9 @@ header p {
       <img src="2.jfif" alt="Castello di Chenonceau" loading="lazy" />
       <div>
         <h3 id="giorno2">Giorno 2 (10 agosto)</h3>
-        <p><strong>Tragitto:</strong> Clermont-Ferrand &rarr; Futuroscope (450 km – 5h)<br />
+        <p><strong>Tragitto:</strong> Saint-Just-en-Chevalet &rarr; Futuroscope (450 km – 5h)<br />
         <strong>Attrazioni:</strong> <a href="https://www.ville-bourges.fr/" target="_blank" rel="noopener noreferrer">Bourges</a>, <a href="https://www.chenonceau.com/" target="_blank" rel="noopener noreferrer">Castello di Chenonceau</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html" target="_blank" rel="noopener noreferrer">Maison de Cœur Futuroscope</a></p>
+        <strong>Pernottamento:</strong> <a href="https://www.airbnb.it/rooms/881718005617053091" target="_blank" rel="noopener noreferrer">Cottage della Grisonnière</a></p>
       </div>
     </article>
 
@@ -229,8 +285,7 @@ header p {
       <img src="3.jfif" alt="Parco Futuroscope" loading="lazy" />
       <div>
         <h3 id="giorno3">Giorno 3 (11 agosto)</h3>
-        <p><strong>Attività:</strong> Intera giornata al <a href="https://www.futuroscope.com/" target="_blank" rel="noopener noreferrer">Parco Futuroscope</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.booking.com/hotel/fr/maison-de-coeur-futuroscope.it.html" target="_blank" rel="noopener noreferrer">Maison de Cœur Futuroscope</a></p>
+        <p><strong>Attività:</strong> Intera giornata al <a href="https://www.futuroscope.com/" target="_blank" rel="noopener noreferrer">Parco Futuroscope</a></p>
       </div>
     </article>
 
@@ -238,9 +293,9 @@ header p {
       <img src="4.jfif" alt="Dinan, Bretagna" loading="lazy" />
       <div>
         <h3 id="giorno4">Giorno 4 (12 agosto)</h3>
-        <p><strong>Tragitto:</strong> Futuroscope &rarr; Corseul (330 km – 3h30)<br />
-        <strong>Attrazioni:</strong> <a href="https://www.dinan.fr/" target="_blank" rel="noopener noreferrer">Dinan</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+        <p><strong>Tragitto:</strong> Futuroscope &rarr; Créhen (330 km – 3h30)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.franciaturismo.net/loira/nantes/" target="_blank" rel="noopener noreferrer">Nantes</a><br/>
+        <strong>Pernottamento:</strong> <a href="https://www.airbnb.it/rooms/1422590903034601750" target="_blank" rel="noopener noreferrer">Casa a Créhen</a></p>
       </div>
     </article>
 
@@ -248,8 +303,7 @@ header p {
       <img src="5.jfif" alt="Mont Saint-Michel" loading="lazy" />
       <div>
         <h3 id="giorno5">Giorno 5 (13 agosto)</h3>
-        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.ot-montsaintmichel.com/" target="_blank" rel="noopener noreferrer">Mont Saint-Michel</a>, <a href="https://www.ville-saint-malo.fr/" target="_blank" rel="noopener noreferrer">Saint-Malo</a>, <a href="https://www.ville-cancale.fr/" target="_blank" rel="noopener noreferrer">Cancale</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.ot-montsaintmichel.com/" target="_blank" rel="noopener noreferrer">Mont Saint-Michel</a>, <a href="https://www.ville-saint-malo.fr/" target="_blank" rel="noopener noreferrer">Saint-Malo</a>, <a href="https://www.ville-cancale.fr/" target="_blank" rel="noopener noreferrer">Cancale</a><br /></p>
       </div>
     </article>
 
@@ -257,8 +311,7 @@ header p {
       <img src="6.jfif" alt="Cap Fréhel, Bretagna" loading="lazy" />
       <div>
         <h3 id="giorno6">Giorno 6 (14 agosto)</h3>
-        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.bretagne35.com/destinations/les-10-destinations/saint-malo-baie-du-mont-saint-michel/experiences/cap-frehel/" target="_blank" rel="noopener noreferrer">Cap Fréhel</a>, <a href="https://www.jardin-medieval.com/fort-la-latte.html" target="_blank" rel="noopener noreferrer">Fort La Latte</a><br />
-        <strong>Pernottamento:</strong> <a href="https://www.giga-location.com/" target="_blank" rel="noopener noreferrer">La Julerie</a></p>
+        <p><strong>Attività:</strong> Giro ad anello con visita di <a href="https://www.bretagna-vacanze.com/destinazioni/alla-scoperta-delle-destinazioni/capo-frehel-saint-malo-baiai-del-mont-saint-michel/cap-frehel-fort-lalatte/" target="_blank" rel="noopener noreferrer">Cap Fréhel e Fort Lalatte</a><br /></p>
       </div>
     </article>
 
@@ -266,8 +319,8 @@ header p {
       <img src="7.jfif" alt="Castello di Chambord" loading="lazy" />
       <div>
         <h3 id="giorno7">Giorno 7 (15 agosto)</h3>
-        <p><strong>Tragitto:</strong> Corseul &rarr; Tours (350 km – 3h30)<br />
-        <strong>Attrazioni:</strong> <a href="https://www.valdeloire-france.com/" target="_blank" rel="noopener noreferrer">Castelli della Loira</a><br />
+        <p><strong>Tragitto:</strong> Créhen &rarr; Neuillé-le-Lierre (350 km – 4h)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.valdeloire-france.com/" target="_blank" rel="noopener noreferrer">Valle della Loira</a>, <a href="https://www.franciaturismo.net/bretagna/ille-et-vilaine/rennes/" target="_blank" rel="noopener noreferrer">Rennes</a><br/>
         <strong>Pernottamento:</strong> <a href="https://www.lamauguiniere.com/" target="_blank" rel="noopener noreferrer">Chambres d'hôtes de la Mauguinière</a></p>
       </div>
     </article>
@@ -276,8 +329,8 @@ header p {
       <img src="8.jfif" alt="Vézelay" loading="lazy" />
       <div>
         <h3 id="giorno8">Giorno 8 (16 agosto)</h3>
-        <p><strong>Tragitto:</strong> Tours &rarr; Martigny (700 km – 7h)<br />
-        <strong>Attrazioni:</strong> <a href="https://www.vezelaytourisme.com/" target="_blank" rel="noopener noreferrer">Vézelay</a>, <a href="https://www.destinationdijon.com/" target="_blank" rel="noopener noreferrer">Digione</a>, <a href="https://www.musees-valais.ch/fr/institution/fondation-barry-martigny-43" target="_blank" rel="noopener noreferrer">Cani San Bernardo</a>, <a href="https://www.bainsdesaillon.ch/" target="_blank" rel="noopener noreferrer">Terme di Martigny</a><br />
+        <p><strong>Tragitto:</strong> Neuillé-le-Lierre &rarr; Liddes (700 km – 7h)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.vezelaytourisme.com/" target="_blank" rel="noopener noreferrer">Vézelay</a>, <a href="https://www.ot-auxerre.com/destination-lauxerrois/destination-history/must-see-monuments/saint-etienne-cathedral/" target="_blank" rel="noopener noreferrer">Cathédrale d'Auxerrey</a>, <a href="https://www.bainsdesaillon.ch/" target="_blank" rel="noopener noreferrer">Terme di Martigny</a><br />
         <strong>Pernottamento:</strong> <a href="https://hotel-gd-st-bernard.ch/" target="_blank" rel="noopener noreferrer">Hôtel du Grand-Saint-Bernard</a></p>
       </div>
     </article>
@@ -286,102 +339,117 @@ header p {
       <img src="9.jfif" alt="Passo del Gran San Bernardo" loading="lazy" />
       <div>
         <h3 id="giorno9">Giorno 9 (17 agosto)</h3>
-        <p><strong>Tragitto:</strong> Martigny &rarr; Genova (400 km – 4h30)<br />
-        <strong>Attrazioni:</strong> <a href="https://www.gsbernard.ch/" target="_blank" rel="noopener noreferrer">Passo del Gran San Bernardo</a>, <a href="https://www.saint-bernard.ch/it/attivita/passeggiata-con-i-cani-san-bernardo-in-estate-17581" target="_blank" rel="noopener noreferrer">Escursione con i cani San Bernardo</a></p>
+        <p><strong>Tragitto:</strong> Liddes &rarr; Genova (400 km – 4h30)<br />
+        <strong>Attrazioni:</strong> <a href="https://www.fondation-barry.ch/it/esperienze/il-passo-del-gran-san-bernardo-84/" target="_blank" rel="noopener noreferrer">Passo del Gran San Bernardo</a></p>
       </div>
     </article>
-
-	<section id="map-section" aria-label="Mappa delle tappe del viaggio" style="margin-top: 3rem;">
-  <h2 style="color: #0055a4; font-family: 'Merriweather', serif;">Mappa delle tappe</h2>
-  <div id="map" style="width: 100%; height: 450px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>
-</section>
-
   </main>
 
-<script>
-  // Coordinates of each tappa with info
-  const tappe = [
-    {
-      day: "Giorno 1 (9 agosto)",
-      place: "Sacra di San Michele / Chambéry",
-      coords: [45.1245, 7.3243], // Sacra di San Michele approx coords
-      url: "https://www.sacradisanmichele.com/"
-    },
-    {
-      day: "Giorno 2 (10 agosto)",
-      place: "Bourges / Castello di Chenonceau",
-      coords: [47.0810, 2.3988], // Bourges approx coords
-      url: "https://www.chenonceau.com/"
-    },
-    {
-      day: "Giorno 3 (11 agosto)",
-      place: "Parco Futuroscope",
-      coords: [46.6691, 0.3982], 
-      url: "https://www.futuroscope.com/"
-    },
-    {
-      day: "Giorno 4 (12 agosto)",
-      place: "Dinan",
-      coords: [48.4553, -2.0463],
-      url: "https://www.dinan.fr/"
-    },
-    {
-      day: "Giorno 5 (13 agosto)",
-      place: "Mont Saint-Michel / Saint-Malo / Cancale",
-      coords: [48.6361, -1.5115], // Mont Saint-Michel approx
-      url: "https://www.ot-montsaintmichel.com/"
-    },
-    {
-      day: "Giorno 6 (14 agosto)",
-      place: "Cap Fréhel / Fort La Latte",
-      coords: [48.6469, -2.3022],
-      url: "https://www.bretagne35.com/destinations/les-10-destinations/saint-malo-baie-du-mont-saint-michel/experiences/cap-frehel/"
-    },
-    {
-      day: "Giorno 7 (15 agosto)",
-      place: "Castelli della Loira",
-      coords: [47.6162, 1.517],
-      url: "https://www.valdeloire-france.com/"
-    },
-    {
-      day: "Giorno 8 (16 agosto)",
-      place: "Vézelay / Digione",
-      coords: [47.4757, 3.7483],
-      url: "https://www.vezelaytourisme.com/"
-    },
-    {
-      day: "Giorno 9 (17 agosto)",
-      place: "Passo del Gran San Bernardo",
-      coords: [45.8390, 7.1786],
-      url: "https://www.gsbernard.ch/"
+  <section aria-label="Mappa dei punti di interesse del tour" style="max-width:900px; margin:0 auto 4rem; padding:0 1rem;">
+    <h2 style="font-family: 'Merriweather', serif; color: var(--blue); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-size:1.8rem; margin-bottom: 0.75rem; border-bottom: 3px solid var(--blue); padding-bottom: 0.2em;">Mappa del Tour</h2>
+    <div id="map" role="region" aria-label="Mappa interattiva con luoghi visitati"></div>
+  </section>
+
+  <button id="backToTop" aria-label="Torna su">↑ Top</button>
+
+  <!-- Leaflet JS from CDN -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
+
+  <script>
+    // Back to top button
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight / 2) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Highlight current article in viewport while scrolling
+    const articles = document.querySelectorAll('article.tappa');
+
+    function highlightCurrentArticle() {
+      const viewportHeight = window.innerHeight;
+      let found = false;
+      articles.forEach(article => {
+        const rect = article.getBoundingClientRect();
+        const top = rect.top;
+        const bottom = rect.bottom;
+        if (top <= viewportHeight * 0.5 && bottom >= viewportHeight * 0.3 && !found) {
+          article.classList.add('highlight');
+          found = true;
+        } else {
+          article.classList.remove('highlight');
+        }
+      });
     }
-  ];
 
-  // Create map centered on Brittany area by default
-  const map = L.map('map').setView([48.5, -2], 6);
+    window.addEventListener('scroll', highlightCurrentArticle);
+    window.addEventListener('load', highlightCurrentArticle);
 
-  // Add OpenStreetMap tile layer
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
-    maxZoom: 18,
-  }).addTo(map);
+    // Accessibility: add visually-hidden class for label
+    const style = document.createElement('style');
+    style.textContent = `.visually-hidden { 
+      position: absolute !important; 
+      height: 1px; 
+      width: 1px; 
+      overflow: hidden; 
+      clip: rect(1px, 1px, 1px, 1px); 
+      white-space: nowrap; 
+    }`;
+    document.head.appendChild(style);
 
-  // Create a marker group
-  const markers = L.featureGroup();
+    // Leaflet map initialization with POIs
+    const map = L.map('map').setView([47.0, 2.5], 5); // Centered on France approx
 
-  // Add markers with popups
-  tappe.forEach(({day, place, coords, url}) => {
-    const marker = L.marker(coords).addTo(map);
-    marker.bindPopup(`
-      <strong>${day}</strong><br/>
-      <a href="${url}" target="_blank" rel="noopener noreferrer">${place}</a>
-    `);
-    markers.addLayer(marker);
-  });
+    // Tile layer from OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-  // Fit map to markers
-  map.fitBounds(markers.getBounds(), {padding: [50, 50]});
-</script>
+    // Points of Interest with coordinates and label
+    const pois = [
+      { name: "Chambéry", coords: [45.5646, 5.9178], url:"https://www.chambery.fr/" },
+      { name: "Bourges", coords: [47.0810, 2.3988], url:"https://www.ville-bourges.fr/" },
+      { name: "Castello di CHENONCEAU", coords: [47.3240, 1.0708], url:"https://www.chenonceau.com/" },
+      { name: "Futuroscope", coords: [46.6670, 0.3695], url:"https://www.futuroscope.com/" },
+      { name: "Nantes", coords: [47.2184, -1.5536], url:"https://www.franciaturismo.net/loira/nantes/" },
+      { name: "Mont Saint-Michel", coords: [48.6361, -1.5115], url:"https://www.ot-montsaintmichel.com/" },
+      { name: "Saint Malo", coords: [48.6493, -2.0259], url:"https://www.ville-saint-malo.fr/" },
+      { name: "Cancale", coords: [48.6634, -1.8609], url:"https://www.ville-cancale.fr/" },
+      { name: "Fort Lalatte", coords: [48.6494, -2.1748], url:"https://www.bretagna-vacanze.com/destinazioni/alla-scoperta-delle-destinazioni/capo-frehel-saint-malo-baiai-del-mont-saint-michel/cap-frehel-fort-lalatte/" },
+      { name: "Dinan", coords: [48.4541, -2.0470], url:"https://www.bretagna-vacanze.com/destinazioni/alla-scoperta-delle-destinazioni/capo-frehel-saint-malo-baiai-del-mont-saint-michel/dinan/" },
+      { name: "Rennes", coords: [48.1173, -1.6778], url:"https://www.franciaturismo.net/bretagna/ille-et-vilaine/rennes/" },
+      { name: "Vézelay", coords: [47.4648, 3.7593], url:"https://www.vezelaytourisme.com/" },
+      { name: "Cathédrale Saint-Étienne d'Auxerrey", coords: [47.7943, 3.5682], url:"https://www.ot-auxerre.com/destination-lauxerrois/destination-history/must-see-monuments/saint-etienne-cathedral/" },
+      { name: "Bains des Saillon (Terme di Martigny)", coords: [46.1133, 7.0820], url:"https://www.bainsdesaillon.ch/" },
+      { name: "Passo Gran San Bernardo", coords: [45.8697, 7.1653], url:"https://www.fondation-barry.ch/it/esperienze/il-passo-del-gran-san-bernardo-84/" }
+    ];
+
+    // Create markers group for fitBounds
+    const markers = [];
+
+    pois.forEach(poi => {
+      const marker = L.marker(poi.coords).addTo(map);
+      const popupContent = `<strong>${poi.name}</strong><br><a href="${poi.url}" target="_blank" rel="noopener noreferrer">Sito ufficiale</a>`;
+      marker.bindPopup(popupContent);
+      markers.push(marker);
+    });
+
+    // Adjust map to fit all POIs comfortably with some padding
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.2));
+
+  </script>
 </body>
 </html>
